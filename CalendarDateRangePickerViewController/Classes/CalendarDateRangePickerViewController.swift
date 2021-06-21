@@ -37,6 +37,8 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     public var doneNavigationButton = "Done"
     
     public var focusOnDate: Date?
+    
+    public var allowSelectSingleDate: Bool = false
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +76,11 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     }
     
     @objc func didTapDone() {
-        if selectedStartDate == nil || selectedEndDate == nil {
+        if selectedStartDate == nil || (selectedEndDate == nil && !allowSelectSingleDate) {
             return
+        }
+        if selectedEndDate == nil && allowSelectSingleDate {
+            selectedEndDate = selectedStartDate
         }
         delegate.didPickDateRange(startDate: selectedStartDate!, endDate: selectedEndDate!)
     }
