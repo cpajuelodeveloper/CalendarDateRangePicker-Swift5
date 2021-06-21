@@ -36,7 +36,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     public var cancelNavigationButton = "Cancel"
     public var doneNavigationButton = "Done"
     
-    public var focusMonth: Date?
+    public var focusOnDate: Date?
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +62,9 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: doneNavigationButton, style: .done, target: self, action: #selector(CalendarDateRangePickerViewController.didTapDone))
         self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
         
-        let section = Calendar.current.dateComponents([.month], from: self.minimumDate, to: focusMonth ?? Date()).month ?? 0
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+        let section = Calendar.current.dateComponents([.month], from: self.minimumDate, to: focusOnDate ?? Date()).month ?? 0
+        collectionView.performBatchUpdates(nil, completion: {
+            (result) in
             self.collectionView.scrollToItem(at: IndexPath.init(item: 0, section: section), at: .top, animated: false)
         })
     }
