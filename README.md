@@ -45,6 +45,7 @@ dateRangePickerViewController.titleText = "Select Date Range"
 dateRangePickerViewController.doneNavigationButton = "Done"
 dateRangePickerViewController.cancelNavigationButton = "Cancel"
 dateRangePickerViewController.focusOnDate = Date()
+dateRangePickerViewController.allowSelectSingleDate = true
 ```
 
 ## Installation
